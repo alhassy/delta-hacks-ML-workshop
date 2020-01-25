@@ -1,29 +1,21 @@
-#+title: Machine Learning --- DeltaHacks Workshop
-# title: Machine Learning @@html:<br><small>@@ DeltaHacks Workshop @@html:</small>@@
+# title: Machine Learning --- DeltaHacks Workshop
+#+title: Machine Learning @@html:<br><small>@@ DeltaHacks Workshop @@html:</small>@@
 #+author: Musa Al-hassy
 #+PROPERTY: header-args :results output :session learning :tangle machine_learning.py :comments both
 
 + These notes and slides were based on a [[https://hackernoon.com/build-your-first-tensorflow-model-in-5-minutes-77237e3cf76d][hackernoon article]].
 + The slides and code where written using [[https://github.com/alhassy/emacs.d#what-does-literate-programming-look-like][literate programming]].
-+ Below are the notes which can be seen as live  [[https://alhassy.github.io/delta-hacks-ML-workshop/machine-learning.html][slides]].
++ Below are the notes which can be seen as live  [[https://alhassy.github.io/delta-hacks-ML-workshop/machine-learning.html][slides]] ---or see the [[https://alhassy.github.io/delta-hacks-ML-workshop/][website]].
 
 Next steps: Read “[[https://www.freecodecamp.org/news/how-to-get-started-with-machine-learning-in-less-than-10-minutes-b5ea68462d23/][How to get started with Machine Learning in about 10 minutes]]”
 (•̀ᴗ•́)و
 
 ...or skip ahead and see [[https://colab.research.google.com/drive/1CVn0hRCP6-Bfc3IbMECEyKPOF7qm90LX0][our notebook]]
 
-* Table of Contents                                    :Github:TOC_4:
-- [[#goal][Goal]]
-- [[#sample-training-data][Sample Training Data]]
-- [[#installations][Installations]]
-- [[#library-imports][Library Imports]]
-- [[#unknowns-and-knowns][Unknowns and Knowns]]
-- [[#training-data][Training Data]]
-- [[#math-error--loss-functions-optimisation-and-initialising-the-model][Math: Error & loss functions, optimisation, and initialising the model]]
-- [[#actually-train][Actually Train!]]
-- [[#approximations-of-𝓌-and-𝒷][Approximations of 𝓌 and 𝒷]]
-
 * Goal
+  :PROPERTIES:
+  :CUSTOM_ID: Goal
+  :END:
 
   - Given =x=, compute =y = 𝓌*x + 𝒷=.
 
@@ -35,6 +27,9 @@ Next steps: Read “[[https://www.freecodecamp.org/news/how-to-get-started-with-
 *Idea*: Given examples ~(x,y)~, and an ~x~, find a ‘suitable’ ~y~.
 
 * Sample Training Data
+  :PROPERTIES:
+  :CUSTOM_ID: Sample-Training-Data
+  :END:
 
 “Supervised machine learning” is when we know the output =y= for some inputs =x=.
 
@@ -58,6 +53,9 @@ Goal: *Get the model to /learn/ that 𝓌 is -1 and 𝒷 is 9*!
 of cats!
 
 * Installations
+  :PROPERTIES:
+  :CUSTOM_ID: Installations
+  :END:
 
 Two possible directions …
 
@@ -70,6 +68,9 @@ pip3 install tensorflow
 + _Using a website_
   https://colab.research.google.com/notebooks/intro.ipynb
 * Library Imports
+  :PROPERTIES:
+  :CUSTOM_ID: Library-Imports
+  :END:
 #+BEGIN_SRC python
 # import tensorflow as tf
 import tensorflow.compat.v1 as tf
@@ -86,6 +87,9 @@ Alternatively, one could install an older version of tensorflow ~pip install
 tensorflow==1.4~.
 
 * Unknowns and Knowns
+  :PROPERTIES:
+  :CUSTOM_ID: Unknowns-and-Knowns
+  :END:
 
 Here's the unknowns that the algorithm will ‘learn’.
 #+BEGIN_SRC python
@@ -104,6 +108,9 @@ y =  tf.placeholder(tf.float32)
 #+RESULTS:
 
 * Training Data
+  :PROPERTIES:
+  :CUSTOM_ID: Training-Data
+  :END:
 
   The example inputs and outputs from before.
 #+BEGIN_SRC python
@@ -116,6 +123,9 @@ y_data = [5.0, 9, -3]
 #+RESULTS:
 
 * Math: Error & loss functions, optimisation, and initialising the model
+  :PROPERTIES:
+  :CUSTOM_ID: Math-Error-loss-functions-optimisation-and-initialising-the-model
+  :END:
 #+BEGIN_SRC python
 learning_rate = 0.001
 
@@ -129,6 +139,9 @@ init = tf.global_variables_initializer()
 |This is where human creativity comes in!|
 
 * Actually Train!
+  :PROPERTIES:
+  :CUSTOM_ID: Actually-Train
+  :END:
 
 #+BEGIN_SRC python
 with tf.Session() as sess:
@@ -143,6 +156,9 @@ with tf.Session() as sess:
 #+END_SRC
 
 * Approximations of 𝓌 and 𝒷
+  :PROPERTIES:
+  :CUSTOM_ID: Approximations-of-𝓌-and-𝒷
+  :END:
 | Iterations |       𝓌 |       𝒷 |
 |------------+---------+---------|
 |          1 | -0.2456 |  0.3298 |
@@ -150,13 +166,34 @@ with tf.Session() as sess:
 |       1000 | -0.9454 | 8.45914 |
 |       1000 | -0.9999 | 8.99983 |
 
+* References
+  :PROPERTIES:
+  :CUSTOM_ID: References
+  :END:
+
++ These notes and slides were based on a [[https://hackernoon.com/build-your-first-tensorflow-model-in-5-minutes-77237e3cf76d][hackernoon article]].
++ The slides and code where written using [[https://github.com/alhassy/emacs.d#what-does-literate-programming-look-like][literate programming]].
++ Next steps: Read “[[https://www.freecodecamp.org/news/how-to-get-started-with-machine-learning-in-less-than-10-minutes-b5ea68462d23/][How to get started with Machine Learning in about 10 minutes]]”
+
+  ...or skip ahead and see [[https://colab.research.google.com/drive/1CVn0hRCP6-Bfc3IbMECEyKPOF7qm90LX0][our notebook]]
+
+(•̀ᴗ•́)و
+
+⇒ [[https://github.com/alhassy/delta-hacks-ML-workshop][Github Repo]] ⇐
+
 * COMMENT Making Slides
+  :PROPERTIES:
+  :CUSTOM_ID: COMMENT-Making-Slides
+  :END:
 #+BEGIN_SRC elisp
 (use-package ox-reveal :demand t
   :custom (org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js"))
 
-  (-let [org-export-babel-evaluate nil]
-       (org-reveal-export-to-html-and-browse))
+(-let [org-export-babel-evaluate nil]
+  (org-reveal-export-to-html-and-browse))
+
+(-let [org-export-babel-evaluate nil]
+  (org-md-export-to-markdown))
 #+END_SRC
 
 #+RESULTS:

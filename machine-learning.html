@@ -38,23 +38,24 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#/slide-org6a927d3">1. Goal</a></li>
-<li><a href="#/slide-org42d9b27">2. Sample Training Data</a></li>
-<li><a href="#/slide-orgcdd02a4">3. Installations</a></li>
-<li><a href="#/slide-org75addaa">4. Library Imports</a></li>
-<li><a href="#/slide-org749ab7b">5. Unknowns and Knowns</a></li>
-<li><a href="#/slide-org020599f">6. Training Data</a></li>
-<li><a href="#/slide-org71effb7">7. Math: Error &amp; loss functions, optimisation, and initialising the model</a></li>
-<li><a href="#/slide-org21d7bbb">8. Actually Train!</a></li>
-<li><a href="#/slide-org98efbe1">9. Approximations of 𝓌 and 𝒷</a></li>
+<li><a href="#/slide-org8e60fc7">1. Goal</a></li>
+<li><a href="#/slide-orge56d8c6">2. Sample Training Data</a></li>
+<li><a href="#/slide-org6ed618c">3. Installations</a></li>
+<li><a href="#/slide-orgbda250b">4. Library Imports</a></li>
+<li><a href="#/slide-org3da938c">5. Unknowns and Knowns</a></li>
+<li><a href="#/slide-org4401b59">6. Training Data</a></li>
+<li><a href="#/slide-org5b09a97">7. Math: Error &amp; loss functions, optimisation, and initialising the model</a></li>
+<li><a href="#/slide-orgac8daa2">8. Actually Train!</a></li>
+<li><a href="#/slide-org2bb6078">9. Approximations of 𝓌 and 𝒷</a></li>
+<li><a href="#/slide-orgd8aa777">10. References</a></li>
 </ul>
 </div>
 </div>
 </section>
 
 <section>
-<section id="slide-org6a927d3">
-<h2 id="org6a927d3"><span class="section-number-2">1</span> Goal</h2>
+<section id="slide-org8e60fc7">
+<h2 id="org8e60fc7"><span class="section-number-2">1</span> Goal</h2>
 <ul>
 <li>Given <code>x</code>, compute <code>y = 𝓌*x + 𝒷</code>.</li>
 
@@ -72,8 +73,8 @@ examples of <code>x</code> inputs and <code>y</code> outputs.</li>
 </section>
 </section>
 <section>
-<section id="slide-org42d9b27">
-<h2 id="org42d9b27"><span class="section-number-2">2</span> Sample Training Data</h2>
+<section id="slide-orge56d8c6">
+<h2 id="orge56d8c6"><span class="section-number-2">2</span> Sample Training Data</h2>
 <p>
 “Supervised machine learning” is when we know the output <code>y</code> for some inputs <code>x</code>.
 </p>
@@ -146,8 +147,8 @@ of cats!
 </section>
 </section>
 <section>
-<section id="slide-orgcdd02a4">
-<h2 id="orgcdd02a4"><span class="section-number-2">3</span> Installations</h2>
+<section id="slide-org6ed618c">
+<h2 id="org6ed618c"><span class="section-number-2">3</span> Installations</h2>
 <p>
 Two possible directions …
 </p>
@@ -170,8 +171,8 @@ pip3 install tensorflow
 </section>
 </section>
 <section>
-<section id="slide-org75addaa">
-<h2 id="org75addaa"><span class="section-number-2">4</span> Library Imports</h2>
+<section id="slide-orgbda250b">
+<h2 id="orgbda250b"><span class="section-number-2">4</span> Library Imports</h2>
 <div class="org-src-container">
 
 <pre  class="src src-python"><code trim><span style="color: #62686E;"># </span><span style="color: #62686E;">import tensorflow as tf</span>
@@ -196,8 +197,8 @@ tensorflow==1.4</code>.
 </section>
 </section>
 <section>
-<section id="slide-org749ab7b">
-<h2 id="org749ab7b"><span class="section-number-2">5</span> Unknowns and Knowns</h2>
+<section id="slide-org3da938c">
+<h2 id="org3da938c"><span class="section-number-2">5</span> Unknowns and Knowns</h2>
 <p>
 Here's the unknowns that the algorithm will ‘learn’.
 </p>
@@ -221,8 +222,8 @@ Here's the date we will provide samples of.
 </section>
 </section>
 <section>
-<section id="slide-org020599f">
-<h2 id="org020599f"><span class="section-number-2">6</span> Training Data</h2>
+<section id="slide-org4401b59">
+<h2 id="org4401b59"><span class="section-number-2">6</span> Training Data</h2>
 <p>
 The example inputs and outputs from before.
 </p>
@@ -238,8 +239,8 @@ The example inputs and outputs from before.
 </section>
 </section>
 <section>
-<section id="slide-org71effb7">
-<h2 id="org71effb7"><span class="section-number-2">7</span> Math: Error &amp; loss functions, optimisation, and initialising the model</h2>
+<section id="slide-org5b09a97">
+<h2 id="org5b09a97"><span class="section-number-2">7</span> Math: Error &amp; loss functions, optimisation, and initialising the model</h2>
 <div class="org-src-container">
 
 <pre  class="src src-python"><code trim><span style="color: #DFDFDF;">learning_rate</span> = 0.001
@@ -268,8 +269,8 @@ The example inputs and outputs from before.
 </section>
 </section>
 <section>
-<section id="slide-org21d7bbb">
-<h2 id="org21d7bbb"><span class="section-number-2">8</span> Actually Train!</h2>
+<section id="slide-orgac8daa2">
+<h2 id="orgac8daa2"><span class="section-number-2">8</span> Actually Train!</h2>
 <div class="org-src-container">
 
 <pre  class="src src-python"><code trim><span style="color: #51afef;">with</span> tf.Session() <span style="color: #51afef;">as</span> sess:
@@ -287,8 +288,8 @@ The example inputs and outputs from before.
 </section>
 </section>
 <section>
-<section id="slide-org98efbe1">
-<h2 id="org98efbe1"><span class="section-number-2">9</span> Approximations of 𝓌 and 𝒷</h2>
+<section id="slide-org2bb6078">
+<h2 id="org2bb6078"><span class="section-number-2">9</span> Approximations of 𝓌 and 𝒷</h2>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -332,6 +333,32 @@ The example inputs and outputs from before.
 </tr>
 </tbody>
 </table>
+
+</section>
+</section>
+<section>
+<section id="slide-orgd8aa777">
+<h2 id="orgd8aa777"><span class="section-number-2">10</span> References</h2>
+<ul>
+<li>These notes and slides were based on a <a href="https://hackernoon.com/build-your-first-tensorflow-model-in-5-minutes-77237e3cf76d">hackernoon article</a>.</li>
+<li>The slides and code where written using <a href="https://github.com/alhassy/emacs.d#what-does-literate-programming-look-like">literate programming</a>.</li>
+<li><p>
+Next steps: Read “<a href="https://www.freecodecamp.org/news/how-to-get-started-with-machine-learning-in-less-than-10-minutes-b5ea68462d23/">How to get started with Machine Learning in about 10 minutes</a>”
+</p>
+
+<p>
+&#x2026;or skip ahead and see <a href="https://colab.research.google.com/drive/1CVn0hRCP6-Bfc3IbMECEyKPOF7qm90LX0">our notebook</a>
+</p></li>
+
+</ul>
+
+<p>
+(•̀ᴗ•́)و
+</p>
+
+<p>
+⇒ <a href="https://github.com/alhassy/delta-hacks-ML-workshop">Github Repo</a> ⇐
+</p>
 </section>
 </section>
 </div>
