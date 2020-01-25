@@ -10,6 +10,8 @@
 Next steps: Read “[[https://www.freecodecamp.org/news/how-to-get-started-with-machine-learning-in-less-than-10-minutes-b5ea68462d23/][How to get started with Machine Learning in about 10 minutes]]”
 (•̀ᴗ•́)و
 
+...or skip ahead and see [[https://colab.research.google.com/drive/1CVn0hRCP6-Bfc3IbMECEyKPOF7qm90LX0][our notebook]]
+
 * Table of Contents                                    :Github:TOC_4:
 - [[#goal][Goal]]
 - [[#sample-training-data][Sample Training Data]]
