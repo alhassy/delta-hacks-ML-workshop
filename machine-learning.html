@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Machine Learning <br><small> DeltaHacks Workshop </small></title>
+<meta name="author" content="(Musa Al-hassy)"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/css/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/css/theme/moon.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://cdn.jsdelivr.net/npm/reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Machine Learning <br><small> DeltaHacks Workshop </small></h1> <h3>Musa Al-hassy</h3>
+<font size="1">
+<a href="?print-pdf&showNotes=true">
+⟪ Flattened View ; Press <code>?</code> for Help ⟫
+</a>
+</font>
+</section>
+<section id="table-of-contents">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#/slide-org6a927d3">1. Goal</a></li>
+<li><a href="#/slide-org42d9b27">2. Sample Training Data</a></li>
+<li><a href="#/slide-orgcdd02a4">3. Installations</a></li>
+<li><a href="#/slide-org75addaa">4. Library Imports</a></li>
+<li><a href="#/slide-org749ab7b">5. Unknowns and Knowns</a></li>
+<li><a href="#/slide-org020599f">6. Training Data</a></li>
+<li><a href="#/slide-org71effb7">7. Math: Error &amp; loss functions, optimisation, and initialising the model</a></li>
+<li><a href="#/slide-org21d7bbb">8. Actually Train!</a></li>
+<li><a href="#/slide-org98efbe1">9. Approximations of 𝓌 and 𝒷</a></li>
+</ul>
+</div>
+</div>
+</section>
+
+<section>
+<section id="slide-org6a927d3">
+<h2 id="org6a927d3"><span class="section-number-2">1</span> Goal</h2>
+<ul>
+<li>Given <code>x</code>, compute <code>y = 𝓌*x + 𝒷</code>.</li>
+
+<li>Wait, what are 𝓌 and 𝒷?</li>
+
+<li>We'll “train our model” by giving it
+examples of <code>x</code> inputs and <code>y</code> outputs.</li>
+
+</ul>
+
+<p>
+<b>Idea</b>: Given examples <code>(x,y)</code>, and an <code>x</code>, find a ‘suitable’ <code>y</code>.
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org42d9b27">
+<h2 id="org42d9b27"><span class="section-number-2">2</span> Sample Training Data</h2>
+<p>
+“Supervised machine learning” is when we know the output <code>y</code> for some inputs <code>x</code>.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">x</th>
+<th scope="col" class="org-right">y</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">-3</td>
+<td class="org-right">12</td>
+</tr>
+
+<tr>
+<td class="org-right">-2</td>
+<td class="org-right">11</td>
+</tr>
+
+<tr>
+<td class="org-right">-1</td>
+<td class="org-right">10</td>
+</tr>
+
+<tr>
+<td class="org-right">0</td>
+<td class="org-right">9</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-right">8</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-right">7</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-right">6</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+⇒ Questions: What is <code>y</code> when <code>x = 5</code>?
+</p>
+
+<p>
+Goal: <b>Get the model to <i>learn</i> that 𝓌 is -1 and 𝒷 is 9</b>!
+</p>
+
+<p>
+<b>Real world:</b> A machine ‘learns’ what is a cat by being exposed to many pictures
+of cats!
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orgcdd02a4">
+<h2 id="orgcdd02a4"><span class="section-number-2">3</span> Installations</h2>
+<p>
+Two possible directions …
+</p>
+
+<ul>
+<li><p>
+<span class="underline">On your own machine</span>
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-shell"><code trim>pip3 install python3
+pip3 install tensorflow
+</code></pre>
+</div></li>
+
+<li><span class="underline">Using a website</span>
+<a href="https://colab.research.google.com/notebooks/intro.ipynb">https://colab.research.google.com/notebooks/intro.ipynb</a></li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org75addaa">
+<h2 id="org75addaa"><span class="section-number-2">4</span> Library Imports</h2>
+<div class="org-src-container">
+
+<pre  class="src src-python"><code trim><span style="color: #62686E;"># </span><span style="color: #62686E;">import tensorflow as tf</span>
+<span style="color: #51afef;">import</span> tensorflow.compat.v1 <span style="color: #51afef;">as</span> tf
+<span style="color: #51afef;">import</span> numpy <span style="color: #51afef;">as</span> np
+
+tf.disable_v2_behavior()
+<span style="color: #51afef;">print</span> (tf.__version__)
+</code></pre>
+</div>
+
+<pre class="example">
+2.1.0
+</pre>
+
+
+<p>
+Alternatively, one could install an older version of tensorflow <code>pip install
+tensorflow==1.4</code>.
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org749ab7b">
+<h2 id="org749ab7b"><span class="section-number-2">5</span> Unknowns and Knowns</h2>
+<p>
+Here's the unknowns that the algorithm will ‘learn’.
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-python"><code trim><span style="color: #DFDFDF;">&#119991;</span> = tf.Variable([.3], tf.float32)
+<span style="color: #DFDFDF;">&#120012;</span> = tf.Variable([-.3], tf.float32)
+</code></pre>
+</div>
+
+<p>
+Here's the date we will provide samples of.
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-python"><code trim><span style="color: #DFDFDF;">x</span> =  tf.placeholder(tf.float32)
+<span style="color: #DFDFDF;">y</span> =  tf.placeholder(tf.float32)
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org020599f">
+<h2 id="org020599f"><span class="section-number-2">6</span> Training Data</h2>
+<p>
+The example inputs and outputs from before.
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-python"><code trim><span style="color: #62686E;"># </span><span style="color: #62686E;">x_data = [-3, -2, -1, 0, 1, 2, 3]</span>
+<span style="color: #62686E;"># </span><span style="color: #62686E;">y_data = [12, 11, 10, 9, 8, 7, 6]</span>
+<span style="color: #DFDFDF;">x_data</span> = [4.0, 0.0, 12.0]
+<span style="color: #DFDFDF;">y_data</span> = [5.0, 9, -3]
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org71effb7">
+<h2 id="org71effb7"><span class="section-number-2">7</span> Math: Error &amp; loss functions, optimisation, and initialising the model</h2>
+<div class="org-src-container">
+
+<pre  class="src src-python"><code trim><span style="color: #DFDFDF;">learning_rate</span> = 0.001
+
+<span style="color: #DFDFDF;">model</span> = &#120012; * x + &#119991;
+<span style="color: #DFDFDF;">delta</span> = tf.square(model - y) <span style="color: #62686E;"># </span><span style="color: #62686E;">error function</span>
+<span style="color: #DFDFDF;">loss</span>  = tf.reduce_sum(delta)
+<span style="color: #DFDFDF;">optimizer</span> = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss)
+<span style="color: #DFDFDF;">init</span> = tf.global_variables_initializer()
+</code></pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">This is where human creativity comes in!</td>
+</tr>
+</tbody>
+</table>
+
+</section>
+</section>
+<section>
+<section id="slide-org21d7bbb">
+<h2 id="org21d7bbb"><span class="section-number-2">8</span> Actually Train!</h2>
+<div class="org-src-container">
+
+<pre  class="src src-python"><code trim><span style="color: #51afef;">with</span> tf.Session() <span style="color: #51afef;">as</span> sess:
+    sess.run(init)
+
+    <span style="color: #51afef;">for</span> i <span style="color: #51afef;">in</span> <span style="color: #C57BDB;">range</span>(1000):
+        <span style="color: #DFDFDF;">feed_dict_batch</span> = {x: x_data, y: y_data}
+        sess.run(optimizer, feed_dict = feed_dict_batch)
+
+    <span style="color: #DFDFDF;">approx_w</span>, <span style="color: #DFDFDF;">approx_b</span> = sess.run([&#120012;, &#119991;])
+    <span style="color: #51afef;">print</span>(<span style="color: #7bc275;">"&#120012; &#8776;"</span>, approx_w, <span style="color: #7bc275;">"and &#119991; &#8776;"</span>, approx_b)
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org98efbe1">
+<h2 id="org98efbe1"><span class="section-number-2">9</span> Approximations of 𝓌 and 𝒷</h2>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Iterations</th>
+<th scope="col" class="org-right">𝓌</th>
+<th scope="col" class="org-right">𝒷</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1</td>
+<td class="org-right">-0.2456</td>
+<td class="org-right">0.3298</td>
+</tr>
+
+<tr>
+<td class="org-right">100</td>
+<td class="org-right">-0.3364</td>
+<td class="org-right">2.4222</td>
+</tr>
+
+<tr>
+<td class="org-right">1000</td>
+<td class="org-right">-0.9454</td>
+<td class="org-right">8.45914</td>
+</tr>
+
+<tr>
+<td class="org-right">1000</td>
+<td class="org-right">-0.9999</td>
+<td class="org-right">8.99983</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+});
+</script>
+</body>
+</html>

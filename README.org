@@ -1,0 +1,160 @@
+#+title: Machine Learning @@html:<br><small>@@ DeltaHacks Workshop @@html:</small>@@
+#+author: Musa Al-hassy
+#+PROPERTY: header-args :results output :session learning :tangle machine_learning.py :comments both
+
++ These notes and slides were based on a [[https://hackernoon.com/build-your-first-tensorflow-model-in-5-minutes-77237e3cf76d][hackernoon article]].
++ The slides and code where written using [[https://github.com/alhassy/emacs.d#what-does-literate-programming-look-like][literate programming]].
++ Below are the notes which can be seen at the website or as a slides:
+  | [[https://alhassy.github.io/delta-hacks-ML-workshop/][Website]] | [[https://alhassy.github.io/delta-hacks-ML-workshop/machine-learning.html][slides]] |
+
+Next steps: Read “[[https://www.freecodecamp.org/news/how-to-get-started-with-machine-learning-in-less-than-10-minutes-b5ea68462d23/][How to get started with Machine Learning in about 10 minutes]]”
+(•̀ᴗ•́)و
+
+* Table of Contents                                    :Github:TOC_4:
+- [[#goal][Goal]]
+- [[#sample-training-data][Sample Training Data]]
+- [[#installations][Installations]]
+- [[#library-imports][Library Imports]]
+- [[#unknowns-and-knowns][Unknowns and Knowns]]
+- [[#training-data][Training Data]]
+- [[#math-error--loss-functions-optimisation-and-initialising-the-model][Math: Error & loss functions, optimisation, and initialising the model]]
+- [[#actually-train][Actually Train!]]
+- [[#approximations-of-𝓌-and-𝒷][Approximations of 𝓌 and 𝒷]]
+
+* Goal
+
+  - Given =x=, compute =y = 𝓌*x + 𝒷=.
+
+  - Wait, what are 𝓌 and 𝒷?
+
+  - We'll “train our model” by giving it
+    examples of =x= inputs and =y= outputs.
+
+*Idea*: Given examples ~(x,y)~, and an ~x~, find a ‘suitable’ ~y~.
+
+* Sample Training Data
+
+“Supervised machine learning” is when we know the output =y= for some inputs =x=.
+
+|  x |  y |
+|----+----|
+| -3 | 12 |
+| -2 | 11 |
+| -1 | 10 |
+|  0 |  9 |
+|  1 |  8 |
+|  2 |  7 |
+|  3 |  6 |
+#+tblfm: $2='(+ 9 (* -1 $1));N
+
+⇒ Questions: What is =y= when ~x = 5~?
+# It's 4!
+
+Goal: *Get the model to /learn/ that 𝓌 is -1 and 𝒷 is 9*!
+
+*Real world:* A machine ‘learns’ what is a cat by being exposed to many pictures
+of cats!
+
+* Installations
+
+Two possible directions …
+
++ _On your own machine_
+  #+BEGIN_SRC shell :tangle no
+pip3 install python3
+pip3 install tensorflow
+#+END_SRC
+
++ _Using a website_
+  https://colab.research.google.com/notebooks/intro.ipynb
+* Library Imports
+#+BEGIN_SRC python
+# import tensorflow as tf
+import tensorflow.compat.v1 as tf
+import numpy as np
+
+tf.disable_v2_behavior()
+print (tf.__version__)
+#+END_SRC
+
+#+RESULTS:
+: 2.1.0
+
+Alternatively, one could install an older version of tensorflow ~pip install
+tensorflow==1.4~.
+
+* Unknowns and Knowns
+
+Here's the unknowns that the algorithm will ‘learn’.
+#+BEGIN_SRC python
+𝒷 = tf.Variable([.3], tf.float32)
+𝓌 = tf.Variable([-.3], tf.float32)
+#+END_SRC
+
+#+RESULTS:
+
+Here's the date we will provide samples of.
+#+BEGIN_SRC python
+x =  tf.placeholder(tf.float32)
+y =  tf.placeholder(tf.float32)
+#+END_SRC
+
+#+RESULTS:
+
+* Training Data
+
+  The example inputs and outputs from before.
+#+BEGIN_SRC python
+# x_data = [-3, -2, -1, 0, 1, 2, 3]
+# y_data = [12, 11, 10, 9, 8, 7, 6]
+x_data = [4.0, 0.0, 12.0]
+y_data = [5.0, 9, -3]
+#+END_SRC
+
+#+RESULTS:
+
+* Math: Error & loss functions, optimisation, and initialising the model
+#+BEGIN_SRC python
+learning_rate = 0.001
+
+model = 𝓌 * x + 𝒷
+delta = tf.square(model - y) # error function
+loss  = tf.reduce_sum(delta)
+optimizer = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss)
+init = tf.global_variables_initializer()
+#+END_SRC
+
+|This is where human creativity comes in!|
+
+* Actually Train!
+
+#+BEGIN_SRC python
+with tf.Session() as sess:
+    sess.run(init)
+
+    for i in range(1000):
+        feed_dict_batch = {x: x_data, y: y_data}
+        sess.run(optimizer, feed_dict = feed_dict_batch)
+
+    approx_w, approx_b = sess.run([𝓌, 𝒷])
+    print("𝓌 ≈", approx_w, "and 𝒷 ≈", approx_b)
+#+END_SRC
+
+* Approximations of 𝓌 and 𝒷
+| Iterations |       𝓌 |       𝒷 |
+|------------+---------+---------|
+|          1 | -0.2456 |  0.3298 |
+|        100 | -0.3364 |  2.4222 |
+|       1000 | -0.9454 | 8.45914 |
+|       1000 | -0.9999 | 8.99983 |
+
+* COMMENT Making Slides
+#+BEGIN_SRC elisp
+(use-package ox-reveal :demand t
+  :custom (org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js"))
+
+  (-let [org-export-babel-evaluate nil]
+       (org-reveal-export-to-html-and-browse))
+#+END_SRC
+
+#+RESULTS:
