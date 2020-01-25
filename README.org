@@ -1,4 +1,5 @@
-#+title: Machine Learning @@html:<br><small>@@ DeltaHacks Workshop @@html:</small>@@
+#+title: Machine Learning --- DeltaHacks Workshop
+# title: Machine Learning @@html:<br><small>@@ DeltaHacks Workshop @@html:</small>@@
 #+author: Musa Al-hassy
 #+PROPERTY: header-args :results output :session learning :tangle machine_learning.py :comments both
 
