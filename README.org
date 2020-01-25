@@ -5,8 +5,7 @@
 
 + These notes and slides were based on a [[https://hackernoon.com/build-your-first-tensorflow-model-in-5-minutes-77237e3cf76d][hackernoon article]].
 + The slides and code where written using [[https://github.com/alhassy/emacs.d#what-does-literate-programming-look-like][literate programming]].
-+ Below are the notes which can be seen at the website or as a slides:
-  | [[https://alhassy.github.io/delta-hacks-ML-workshop/][Website]] | [[https://alhassy.github.io/delta-hacks-ML-workshop/machine-learning.html][slides]] |
++ Below are the notes which can be seen as live  [[https://alhassy.github.io/delta-hacks-ML-workshop/machine-learning.html][slides]].
 
 Next steps: Read “[[https://www.freecodecamp.org/news/how-to-get-started-with-machine-learning-in-less-than-10-minutes-b5ea68462d23/][How to get started with Machine Learning in about 10 minutes]]”
 (•̀ᴗ•́)و
