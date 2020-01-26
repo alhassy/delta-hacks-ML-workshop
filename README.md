@@ -14,11 +14,12 @@
 -   These notes and slides were based on a [hackernoon article](https://hackernoon.com/build-your-first-tensorflow-model-in-5-minutes-77237e3cf76d).
 -   The slides and code where written using [literate programming](https://github.com/alhassy/emacs.d#what-does-literate-programming-look-like).
 -   Below are the notes which can be seen as live  [slides](https://alhassy.github.io/delta-hacks-ML-workshop/machine-learning.html) &#x2014;or see the [website](https://alhassy.github.io/delta-hacks-ML-workshop/).
+-   [This is our notebook](https://colab.research.google.com/drive/1CVn0hRCP6-Bfc3IbMECEyKPOF7qm90LX)
 
 Next steps: Read “[How to get started with Machine Learning in about 10 minutes](https://www.freecodecamp.org/news/how-to-get-started-with-machine-learning-in-less-than-10-minutes-b5ea68462d23/)”
 (•̀ᴗ•́)و
 
-&#x2026;or skip ahead and see [our notebook](https://colab.research.google.com/drive/1CVn0hRCP6-Bfc3IbMECEyKPOF7qm90LX0)
+&#x2026;or skip ahead and see [our notebook for Titanic](https://colab.research.google.com/drive/1NJJRSBjS3VuDwPUMjiyPxZnTg4lRZvGR)
 
 
 <a id="Goal"></a>
